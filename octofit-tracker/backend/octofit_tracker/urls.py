@@ -28,21 +28,44 @@ router.register(r'workouts', views.WorkoutViewSet)
 router.register(r'leaderboards', views.LeaderboardViewSet)
 
 CODESPACE_NAME = os.environ.get('CODESPACE_NAME', '')
-# Use HTTP for the Codespace host to avoid any certificate/HTTPS verification issues
-# when constructing absolute API URLs for quick testing. Localhost remains HTTP.
-base_url = f"http://{CODESPACE_NAME}-8000.app.github.dev" if CODESPACE_NAME else "http://localhost:8000"
+# Construct both HTTPS and HTTP base URLs for Codespaces. Return both in the API
+# root so clients can choose the insecure HTTP fallback to avoid certificate
+# verification issues during quick development testing.
+if CODESPACE_NAME:
+    base_url_https = f"https://{CODESPACE_NAME}-8000.app.github.dev"
+    base_url_http = f"http://{CODESPACE_NAME}-8000.app.github.dev"
+else:
+    base_url_https = "http://localhost:8000"
+    base_url_http = "http://localhost:8000"
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 @api_view(['GET'])
 def api_root(request, format=None):
+    # Provide both secure and insecure URLs so callers can opt into the HTTP
+    # fallback when testing without validating Codespaces TLS certificates.
     return Response({
-        'users': f'{base_url}/api/users/',
-        'teams': f'{base_url}/api/teams/',
-        'activities': f'{base_url}/api/activities/',
-        'workouts': f'{base_url}/api/workouts/',
-        'leaderboards': f'{base_url}/api/leaderboards/',
+        'users': {
+            'secure': f'{base_url_https}/api/users/',
+            'insecure': f'{base_url_http}/api/users/',
+        },
+        'teams': {
+            'secure': f'{base_url_https}/api/teams/',
+            'insecure': f'{base_url_http}/api/teams/',
+        },
+        'activities': {
+            'secure': f'{base_url_https}/api/activities/',
+            'insecure': f'{base_url_http}/api/activities/',
+        },
+        'workouts': {
+            'secure': f'{base_url_https}/api/workouts/',
+            'insecure': f'{base_url_http}/api/workouts/',
+        },
+        'leaderboards': {
+            'secure': f'{base_url_https}/api/leaderboards/',
+            'insecure': f'{base_url_http}/api/leaderboards/',
+        },
     })
 
 urlpatterns = [
