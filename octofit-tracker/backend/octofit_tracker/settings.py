@@ -25,7 +25,18 @@ SECRET_KEY = 'django-insecure-n(=w1w60gykq3ukgv&of_$v!!m1mln)b4^r(qletf2-9pb*qml
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+import os
+CODESPACE_NAME = os.environ.get('CODESPACE_NAME', '')
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+if CODESPACE_NAME:
+    # Common Codespace host variants that may be used by the tunnel/proxy.
+    # Include the -8000.app.github.dev host used in forwarding, and the
+    # plain <CODESPACE_NAME>.github.dev host that the tunnel may redirect to.
+    codespace_hosts = [
+        f"{CODESPACE_NAME}-8000.app.github.dev",
+        f"{CODESPACE_NAME}.github.dev",
+    ]
+    ALLOWED_HOSTS.extend(codespace_hosts)
 
 
 # Application definition
