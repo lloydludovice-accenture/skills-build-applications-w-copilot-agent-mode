@@ -1,0 +1,131 @@
+.App {
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header / Navigation */
+.App-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  background: linear-gradient(90deg, #093028 0%, #237A57 100%);
+  color: #f7fff7;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.App-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.App-small-logo {
+  height: 48px;
+  width: 48px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  padding: 6px;
+}
+
+.App-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: #e6fffa;
+}
+
+.App-nav {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.App-nav a {
+  color: rgba(231, 255, 245, 0.95);
+  text-decoration: none;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.App-nav a:hover {
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-1px);
+}
+
+/* Main content area */
+.App-content {
+  flex: 1 1 auto;
+  padding: 2rem 1.25rem;
+  background: linear-gradient(180deg, #f4fff9 0%, #e9fff1 100%);
+  color: #06363a;
+}
+
+.App-heading {
+  color: #0b525b;
+  margin-bottom: 0.5rem;
+}
+
+.App-subheading {
+  color: #2a7f81;
+  margin-bottom: 1.25rem;
+}
+
+/* Buttons */
+.octo-btn {
+  background: linear-gradient(180deg,#2bb673 0%,#0b845b 100%);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(11,132,91,0.18);
+}
+
+.octo-btn:hover { transform: translateY(-2px); }
+
+/* Links */
+a.octo-link { color: #0b845b; font-weight: 600; }
+a.octo-link:hover { color: #056157; }
+
+/* Tables */
+.octo-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background: linear-gradient(180deg,#ffffff 0%, #f1fff7 100%);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.octo-table th, .octo-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(11,132,91,0.08);
+}
+
+.octo-table th {
+  background: rgba(11,132,91,0.06);
+  color: #05514e;
+  font-weight: 700;
+}
+
+.octo-table tr:hover td { background: rgba(11,132,91,0.02); }
+
+/* Utility */
+.container { max-width: 960px; margin: 0 auto; }
+
+@media (max-width: 640px) {
+  .App-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .App-nav { width: 100%; justify-content: flex-start; gap: 0.5rem; }
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
